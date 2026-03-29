@@ -12,19 +12,13 @@
 
 ---
 
-## 🚀 WHAT IS THIS?
-
-A **real-time chat application** powered by **GitHub OAuth** and **Pusher WebSocket**. Users authenticate with their GitHub account and chat instantly with anyone viewing this README.
+## 🚀 LIVE CHAT WIDGET
 
 <div align="center">
 
-### 🔥 CLICK TO JOIN THE CHAT 🔥
+[![Live Chat Widget](https://git-live-chat.vercel.app/chat-widget.svg)](https://git-live-chat.vercel.app)
 
-<a href="https://git-live-chat.vercel.app" target="_blank">
-  <img src="https://img.shields.io/badge/🚀_OPEN_LIVE_CHAT_NOW-000000?style=for-the-badge&logoColor=white" alt="Open Chat" />
-</a>
-
-**👆 Click above to start chatting with GitHub users in real-time!**
+**👆 Click the widget above to join the live chat!**
 
 </div>
 
