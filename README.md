@@ -16,9 +16,9 @@
 
 <div align="center">
 
-[![Live Chat Widget](https://git-live-chat.vercel.app/chat-widget.svg)](https://git-live-chat.vercel.app)
+![Live Chat](https://git-live-chat.vercel.app/chat-live.svg)
 
-**👆 Click the widget above to join the live chat!**
+**👆 Real-time chat! Sign in to send messages!**
 
 </div>
 
