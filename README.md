@@ -12,13 +12,15 @@
 
 ---
 
-## 🚀 LIVE CHAT WIDGET
+## 🚀 LIVE CHAT
 
 <div align="center">
 
-![Live Chat](https://git-live-chat.vercel.app/chat-live.svg)
+[![Live Chat](https://git-live-chat.vercel.app/chat-preview.svg)](https://git-live-chat.vercel.app)
 
-**👆 Real-time chat! Sign in to send messages!**
+**👆 Click the chat preview above to join the live conversation!**
+
+*Opens in new tab • Sign in with GitHub • Start chatting instantly*
 
 </div>
 
