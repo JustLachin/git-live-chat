@@ -1,0 +1,267 @@
+<svg fill="none" viewBox="0 0 1000 700" width="1000" height="700" xmlns="http://www.w3.org/2000/svg">
+  <foreignObject width="100%" height="100%">
+    <div xmlns="http://www.w3.org/1999/xhtml">
+      <style>
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+        .chat-app {
+          width: 1000px;
+          height: 700px;
+          background: #0d1117;
+          border-radius: 12px;
+          border: 2px solid #30363d;
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        .chat-header {
+          background: #161b22;
+          padding: 20px;
+          border-bottom: 2px solid #30363d;
+        }
+        .chat-title {
+          color: white;
+          font-size: 24px;
+          font-weight: 900;
+        }
+        .online-status {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          color: #8b949e;
+          font-size: 14px;
+          margin-top: 5px;
+        }
+        .online-dot {
+          width: 8px;
+          height: 8px;
+          background: #3fb950;
+          border-radius: 50%;
+          animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.5; }
+        }
+        .chat-body {
+          flex: 1;
+          padding: 20px;
+          overflow-y: auto;
+        }
+        .message {
+          display: flex;
+          gap: 12px;
+          margin-bottom: 16px;
+          animation: slideIn 0.3s ease;
+        }
+        @keyframes slideIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .message-avatar {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          border: 2px solid #30363d;
+        }
+        .message-content {
+          flex: 1;
+        }
+        .message-header {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin-bottom: 4px;
+        }
+        .message-username {
+          color: #8b949e;
+          font-size: 12px;
+          font-weight: 600;
+        }
+        .message-time {
+          color: #6e7681;
+          font-size: 11px;
+        }
+        .message-bubble {
+          background: #21262d;
+          color: #c9d1d9;
+          padding: 12px 16px;
+          border-radius: 16px;
+          word-wrap: break-word;
+          max-width: 600px;
+        }
+        .chat-input-container {
+          padding: 20px;
+          background: #161b22;
+          border-top: 2px solid #30363d;
+        }
+        .chat-input-wrapper {
+          display: flex;
+          gap: 12px;
+        }
+        .chat-input {
+          flex: 1;
+          background: #0d1117;
+          border: 2px solid #30363d;
+          border-radius: 8px;
+          padding: 12px 16px;
+          color: white;
+          font-size: 14px;
+          outline: none;
+        }
+        .chat-input:focus {
+          border-color: #1f6feb;
+        }
+        .send-button {
+          background: #238636;
+          color: white;
+          border: none;
+          padding: 12px 24px;
+          border-radius: 8px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s;
+        }
+        .send-button:hover {
+          background: #2ea043;
+        }
+        .login-screen {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          height: 100%;
+          text-align: center;
+        }
+        .login-emoji {
+          font-size: 80px;
+          margin-bottom: 20px;
+        }
+        .login-title {
+          color: white;
+          font-size: 36px;
+          font-weight: 900;
+          margin-bottom: 12px;
+        }
+        .login-subtitle {
+          color: #8b949e;
+          font-size: 16px;
+          margin-bottom: 32px;
+        }
+        .login-button {
+          background: #238636;
+          color: white;
+          border: none;
+          padding: 16px 32px;
+          border-radius: 8px;
+          font-weight: 700;
+          font-size: 16px;
+          cursor: pointer;
+          display: inline-flex;
+          align-items: center;
+          gap: 12px;
+          transition: all 0.3s;
+          text-decoration: none;
+        }
+        .login-button:hover {
+          background: #2ea043;
+          transform: scale(1.05);
+        }
+      </style>
+      
+      <div class="chat-app">
+        <div class="chat-header">
+          <div class="chat-title">💬 LIVE CHAT</div>
+          <div class="online-status">
+            <span class="online-dot"></span>
+            <span id="online-count">Loading...</span>
+          </div>
+        </div>
+        
+        <div class="chat-body" id="chat-body">
+          <div class="login-screen">
+            <div class="login-emoji">🚀</div>
+            <div class="login-title">Welcome to Live Chat</div>
+            <div class="login-subtitle">Sign in with GitHub to start chatting</div>
+            <a href="https://git-live-chat.vercel.app" target="_blank" class="login-button">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+              </svg>
+              Sign in with GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <script src="https://js.pusher.com/8.4.0/pusher.min.js"></script>
+      <script>
+        // Connect to Pusher
+        const pusher = new Pusher('a6980257815c1d1d1e6e', {
+          cluster: 'eu'
+        });
+
+        const channel = pusher.subscribe('github-chat');
+        const messages = [];
+        let userCount = 0;
+
+        // Listen for messages
+        channel.bind('message', function(data) {
+          addMessage(data);
+        });
+
+        // Listen for user count
+        channel.bind('user-count', function(data) {
+          userCount = data.count;
+          document.getElementById('online-count').textContent = userCount + ' users online';
+        });
+
+        function addMessage(msg) {
+          const chatBody = document.getElementById('chat-body');
+          
+          // Remove login screen if exists
+          const loginScreen = chatBody.querySelector('.login-screen');
+          if (loginScreen) {
+            loginScreen.remove();
+          }
+
+          const messageDiv = document.createElement('div');
+          messageDiv.className = 'message';
+          
+          const time = new Date(msg.timestamp).toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit'
+          });
+
+          messageDiv.innerHTML = `
+            <img src="${msg.avatar}" alt="${msg.username}" class="message-avatar" />
+            <div class="message-content">
+              <div class="message-header">
+                <span class="message-username">@${msg.username}</span>
+                <span class="message-time">${time}</span>
+              </div>
+              <div class="message-bubble">${escapeHtml(msg.text)}</div>
+            </div>
+          `;
+
+          chatBody.appendChild(messageDiv);
+          chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function escapeHtml(text) {
+          const div = document.createElement('div');
+          div.textContent = text;
+          return div.innerHTML;
+        }
+
+        // Initial connection
+        pusher.connection.bind('connected', function() {
+          console.log('Connected to Pusher');
+        });
+      </script>
+    </div>
+  </foreignObject>
+</svg>
