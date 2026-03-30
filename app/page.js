@@ -22,6 +22,17 @@ export default function Home() {
   useEffect(() => {
     if (!session) return
 
+    // Send auth success to parent window (for SVG widget)
+    if (window.opener) {
+      window.opener.postMessage({
+        type: 'auth-success',
+        user: {
+          username: session.user.username,
+          image: session.user.image
+        }
+      }, 'https://github.com');
+    }
+
     const pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_KEY, {
       cluster: process.env.NEXT_PUBLIC_PUSHER_CLUSTER,
     })
