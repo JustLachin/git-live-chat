@@ -17,10 +17,10 @@
 <div align="center">
 
 <a href="https://git-live-chat.vercel.app" target="_blank">
-  <img src="https://git-live-chat.vercel.app/api/og" width="100%" alt="Live Chat" />
+  <img src="https://git-live-chat.vercel.app/api/chat-widget" width="100%" alt="Live Chat" />
 </a>
 
-**👆 Click above to open the live chat!**
+**👆 Click above to open the live chat! (Updates every refresh)**
 
 </div>
 
