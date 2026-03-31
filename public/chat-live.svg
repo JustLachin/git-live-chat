@@ -1,166 +1,74 @@
-<svg fill="none" viewBox="0 0 1000 700" width="1000" height="700" xmlns="http://www.w3.org/2000/svg">
-  <foreignObject width="100%" height="100%">
-    <div xmlns="http://www.w3.org/1999/xhtml">
-      <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        .chat-app { width: 1000px; height: 700px; background: #0d1117; border-radius: 12px; border: 2px solid #30363d; display: flex; flex-direction: column; overflow: hidden; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
-        .chat-header { background: #161b22; padding: 20px; border-bottom: 2px solid #30363d; display: flex; justify-content: space-between; align-items: center; }
-        .chat-title { color: white; font-size: 24px; font-weight: 900; }
-        .online-status { display: flex; align-items: center; gap: 8px; color: #8b949e; font-size: 14px; margin-top: 5px; }
-        .online-dot { width: 8px; height: 8px; background: #3fb950; border-radius: 50%; animation: pulse 2s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-        .user-badge { display: flex; align-items: center; gap: 10px; background: #21262d; padding: 8px 16px; border-radius: 20px; }
-        .user-avatar { width: 32px; height: 32px; border-radius: 50%; border: 2px solid #238636; }
-        .username { color: white; font-weight: 600; font-size: 14px; }
-        .chat-body { flex: 1; padding: 20px; overflow-y: auto; }
-        .message { display: flex; gap: 12px; margin-bottom: 16px; }
-        .message-avatar { width: 40px; height: 40px; border-radius: 50%; border: 2px solid #30363d; cursor: pointer; }
-        .message-content { flex: 1; }
-        .message-header { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
-        .message-username { color: #8b949e; font-size: 12px; font-weight: 600; }
-        .message-time { color: #6e7681; font-size: 11px; }
-        .message-bubble { background: #21262d; color: #c9d1d9; padding: 12px 16px; border-radius: 16px; word-wrap: break-word; max-width: 600px; }
-        .message-bubble.own { background: #1f6feb; }
-        .chat-input-container { padding: 20px; background: #161b22; border-top: 2px solid #30363d; }
-        .chat-input-wrapper { display: flex; gap: 12px; }
-        .chat-input { flex: 1; background: #0d1117; border: 2px solid #30363d; border-radius: 8px; padding: 12px 16px; color: white; font-size: 14px; outline: none; }
-        .chat-input:focus { border-color: #1f6feb; }
-        .send-button { background: #238636; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; }
-        .send-button:hover { background: #2ea043; }
-        .login-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; }
-        .login-emoji { font-size: 80px; margin-bottom: 20px; }
-        .login-title { color: white; font-size: 36px; font-weight: 900; margin-bottom: 12px; }
-        .login-subtitle { color: #8b949e; font-size: 16px; margin-bottom: 32px; }
-        .login-button { background: #238636; color: white; border: none; padding: 16px 32px; border-radius: 8px; font-weight: 700; font-size: 16px; cursor: pointer; display: inline-flex; align-items: center; gap: 12px; }
-        .login-button:hover { background: #2ea043; }
-      </style>
-      
-      <div class="chat-app">
-        <div class="chat-header">
-          <div>
-            <div class="chat-title">💬 LIVE CHAT</div>
-            <div class="online-status">
-              <span class="online-dot"></span>
-              <span id="online-count">Connecting...</span>
-            </div>
-          </div>
-          <div id="user-section"></div>
-        </div>
-        
-        <div class="chat-body" id="chat-body">
-          <div class="login-screen">
-            <div class="login-emoji">🚀</div>
-            <div class="login-title">Welcome to Live Chat</div>
-            <div class="login-subtitle">Sign in with GitHub to start chatting</div>
-            <button class="login-button" onclick="openLogin()">
-              Sign in with GitHub
-            </button>
-          </div>
-        </div>
-        
-        <div class="chat-input-container" style="display: none;" id="input-container">
-          <div class="chat-input-wrapper">
-            <input type="text" class="chat-input" placeholder="Type your message..." id="message-input" maxlength="5000" />
-            <button class="send-button" onclick="sendMsg()">Send</button>
-          </div>
-        </div>
-      </div>
-      
-      <script src="https://js.pusher.com/8.4.0/pusher.min.js"></script>
-      <script>
-        var user = null;
-        var pusher = new Pusher('a6980257815c1d1d1e6e', { cluster: 'eu' });
-        var channel = pusher.subscribe('github-chat');
-        
-        channel.bind('message', function(data) {
-          var body = document.getElementById('chat-body');
-          var login = body.querySelector('.login-screen');
-          if (login) login.remove();
-          
-          var msg = document.createElement('div');
-          msg.className = 'message';
-          var time = new Date(data.timestamp).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-          var own = user ? (data.username === user.username ? 'own' : '') : '';
-          
-          msg.innerHTML = '<img src="' + data.avatar + '" class="message-avatar" />' +
-            '<div class="message-content">' +
-            '<div class="message-header">' +
-            '<span class="message-username">@' + data.username + '</span>' +
-            '<span class="message-time">' + time + '</span>' +
-            '</div>' +
-            '<div class="message-bubble ' + own + '">' + escape(data.text) + '</div>' +
-            '</div>';
-          
-          body.appendChild(msg);
-          body.scrollTop = body.scrollHeight;
-        });
-        
-        channel.bind('user-count', function(data) {
-          document.getElementById('online-count').textContent = data.count + ' users online';
-        });
-        
-        function openLogin() {
-          var w = 600, h = 700;
-          var left = (screen.width - w) / 2;
-          var top = (screen.height - h) / 2;
-          var popup = window.open('https://git-live-chat.vercel.app', 'Login', 'width=' + w + ',height=' + h + ',left=' + left + ',top=' + top);
-          
-          window.addEventListener('message', function(e) {
-            if (e.origin !== 'https://git-live-chat.vercel.app') return;
-            if (e.data.type === 'auth-success') {
-              user = e.data.user;
-              popup.close();
-              onLogin();
-            }
-          });
-        }
-        
-        function onLogin() {
-          document.getElementById('login-screen').remove();
-          document.getElementById('input-container').style.display = 'block';
-          document.getElementById('user-section').innerHTML = 
-            '<div class="user-badge">' +
-            '<img src="' + user.image + '" class="user-avatar" />' +
-            '<span class="username">@' + user.username + '</span>' +
-            '</div>';
-          
-          fetch('https://git-live-chat.vercel.app/api/join', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username: user.username, avatar: user.image })
-          });
-        }
-        
-        function sendMsg() {
-          if (!user) return;
-          var input = document.getElementById('message-input');
-          var text = input.value.trim();
-          if (!text) return;
-          
-          fetch('https://git-live-chat.vercel.app/api/messages', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              username: user.username,
-              avatar: user.image,
-              text: text,
-              timestamp: new Date().toISOString()
-            })
-          });
-          
-          input.value = '';
-        }
-        
-        function escape(text) {
-          var div = document.createElement('div');
-          div.textContent = text;
-          return div.innerHTML;
-        }
-        
-        document.getElementById('message-input').addEventListener('keypress', function(e) {
-          if (e.key === 'Enter') sendMsg();
-        });
-      </script>
-    </div>
-  </foreignObject>
+<svg fill="none" viewBox="0 0 1200 800" width="1200" height="800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#161b22;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="800" rx="16" fill="url(#bg)" stroke="#30363d" stroke-width="3" filter="url(#shadow)"/>
+  
+  <!-- Header -->
+  <rect y="0" width="1200" height="100" rx="16" fill="#161b22"/>
+  <line x1="0" y1="100" x2="1200" y2="100" stroke="#30363d" stroke-width="3"/>
+  
+  <!-- Title -->
+  <text x="40" y="55" font-family="Arial, sans-serif" font-size="36" font-weight="900" fill="white">💬 LIVE CHAT</text>
+  
+  <!-- Online Status -->
+  <circle cx="40" cy="80" r="6" fill="#3fb950">
+    <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <text x="60" y="87" font-family="Arial, sans-serif" font-size="16" fill="#8b949e">Real-time GitHub chat • Click anywhere to join</text>
+  
+  <!-- Demo Messages -->
+  <g transform="translate(40, 150)">
+    <!-- Message 1 -->
+    <circle cx="25" cy="25" r="25" fill="#238636"/>
+    <text x="25" y="35" font-family="Arial, sans-serif" font-size="24" fill="white" text-anchor="middle">G</text>
+    <rect x="70" y="5" width="500" height="80" rx="20" fill="#21262d"/>
+    <text x="90" y="35" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="#8b949e">@github</text>
+    <text x="90" y="60" font-family="Arial, sans-serif" font-size="16" fill="#c9d1d9">Welcome to Git Live Chat! 🚀</text>
+  </g>
+  
+  <g transform="translate(40, 270)">
+    <!-- Message 2 -->
+    <circle cx="25" cy="25" r="25" fill="#1f6feb"/>
+    <text x="25" y="35" font-family="Arial, sans-serif" font-size="24" fill="white" text-anchor="middle">O</text>
+    <rect x="70" y="5" width="600" height="80" rx="20" fill="#21262d"/>
+    <text x="90" y="35" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="#8b949e">@octocat</text>
+    <text x="90" y="60" font-family="Arial, sans-serif" font-size="16" fill="#c9d1d9">Real-time messaging powered by Pusher &amp; GitHub OAuth</text>
+  </g>
+  
+  <g transform="translate(40, 390)">
+    <!-- Message 3 -->
+    <circle cx="25" cy="25" r="25" fill="#da3633"/>
+    <text x="25" y="35" font-family="Arial, sans-serif" font-size="24" fill="white" text-anchor="middle">J</text>
+    <rect x="70" y="5" width="450" height="80" rx="20" fill="#1f6feb"/>
+    <text x="90" y="35" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="white">@JustLachin</text>
+    <text x="90" y="60" font-family="Arial, sans-serif" font-size="16" fill="white">Join us and start chatting! 💬</text>
+  </g>
+  
+  <!-- CTA Box -->
+  <rect x="300" y="520" width="600" height="180" rx="20" fill="#238636" filter="url(#shadow)"/>
+  <text x="600" y="580" font-family="Arial, sans-serif" font-size="64" text-anchor="middle">🚀</text>
+  <text x="600" y="640" font-family="Arial, sans-serif" font-size="28" font-weight="900" fill="white" text-anchor="middle">CLICK TO JOIN CHAT</text>
+  <text x="600" y="675" font-family="Arial, sans-serif" font-size="16" fill="white" text-anchor="middle" opacity="0.9">Sign in with GitHub • Start chatting instantly</text>
+  
+  <!-- Input Area -->
+  <rect y="720" width="1200" height="80" fill="#161b22"/>
+  <line x1="0" y1="720" x2="1200" y2="720" stroke="#30363d" stroke-width="3"/>
+  <rect x="40" y="740" width="1000" height="45" rx="10" fill="#0d1117" stroke="#30363d" stroke-width="2"/>
+  <text x="60" y="768" font-family="Arial, sans-serif" font-size="16" fill="#6e7681">Type your message...</text>
+  <rect x="1060" y="740" width="120" height="45" rx="10" fill="#238636"/>
+  <text x="1120" y="768" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="white" text-anchor="middle">Send 🚀</text>
+  
+  <!-- Clickable overlay -->
+  <a href="https://git-live-chat.vercel.app" target="_blank">
+    <rect width="1200" height="800" fill="transparent" cursor="pointer"/>
+  </a>
 </svg>
