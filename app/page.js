@@ -78,6 +78,13 @@ export default function Home() {
       body: JSON.stringify(message),
     })
 
+    // Update widget
+    await fetch('/api/chat-widget', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: session.user.username, text: inputMessage }),
+    })
+
     setInputMessage('')
   }
 
