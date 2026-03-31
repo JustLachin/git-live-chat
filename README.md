@@ -2,11 +2,11 @@
 
 # 💬 GIT LIVE CHAT
 
-<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=28&pause=1000&color=000000&center=true&vCenter=true&width=600&lines=Real-Time+GitHub+Chat;Embedded+in+README;Built+with+Pusher+%26+Vercel;Join+the+Conversation!" alt="Typing SVG" />
+<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=28&pause=1000&color=FFFFFF&center=true&vCenter=true&width=600&lines=Real-Time+GitHub+Chat;Embedded+in+README;Built+with+Pusher+%26+Vercel;Join+the+Conversation!" alt="Typing SVG" />
 
-[![GitHub Stars](https://img.shields.io/github/stars/JustLachin/git-live-chat?style=for-the-badge&logo=github&color=black)](https://github.com/JustLachin/git-live-chat/stargazers)
-[![Live Demo](https://img.shields.io/badge/LIVE-CHAT-success?style=for-the-badge&logo=vercel&color=black)](https://git-live-chat.vercel.app)
-[![License](https://img.shields.io/badge/LICENSE-MIT-blue?style=for-the-badge&color=black)](LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/JustLachin/git-live-chat?style=for-the-badge&logo=github&color=yellow&labelColor=black)](https://github.com/JustLachin/git-live-chat/stargazers)
+[![Live Demo](https://img.shields.io/badge/LIVE-CHAT-success?style=for-the-badge&logo=vercel&color=green&labelColor=black)](https://git-live-chat.vercel.app)
+[![License](https://img.shields.io/badge/LICENSE-MIT-blue?style=for-the-badge&color=blue&labelColor=black)](LICENSE)
 
 </div>
 
