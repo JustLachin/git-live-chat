@@ -12,35 +12,17 @@
 
 ---
 
-## 🚀 SEND A MESSAGE
+## 🚀 LIVE CHAT
 
 <div align="center">
 
-### 💬 Quick Message (No Login Required!)
+<a href="https://git-live-chat.vercel.app" target="_blank">
+  <img src="https://git-live-chat.vercel.app/api/og" width="100%" alt="Live Chat" />
+</a>
 
-[![Send Message](https://img.shields.io/badge/📨_SEND_MESSAGE-Click_Here-238636?style=for-the-badge&labelColor=0d1117)](https://github.com/JustLachin/git-live-chat/issues/new?title=Chat%20Message&body=**Your%20Name:**%20%0A%0A**Message:**%20%0A%0A---%0ASent%20from%20Git%20Live%20Chat)
-
-**👆 Click above to send a message instantly!**
-
-*Messages appear in real-time • No account needed • Just fill and submit*
-
----
-
-### 🔥 OR JOIN FULL CHAT APP
-
-[![Open Chat App](https://img.shields.io/badge/🚀_OPEN_FULL_CHAT-Click_Here-1f6feb?style=for-the-badge&labelColor=0d1117)](https://git-live-chat.vercel.app)
-
-*Sign in with GitHub • Real-time messaging • Full features*
+**👆 Click above to open the live chat!**
 
 </div>
-
----
-
-## 📬 RECENT MESSAGES
-
-<!-- MESSAGES:START -->
-<!-- This section will be auto-updated with recent messages -->
-<!-- MESSAGES:END -->
 
 ---
 
